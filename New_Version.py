@@ -7,7 +7,7 @@ keyboard = Controller()
 time.sleep(3)
 
 # Variables:
-quest_status = "Quest_Done"
+quest_status = "Quest_Completed"
 # RGB
 hedgehog = (189, 138, 66)
 gardener = (49, 73, 49)
@@ -15,7 +15,7 @@ gardener_eye = (132, 219, 144)
 flower_rgb = (247, 214, )
 # Cords
 next_click = (830, 620)
-let_me_hear = (300, 485)
+let_me_hear = (277, 487)
 flower_cords = (1120, 600)
 # Regions
 region_screen = (15, 55, 1885, 630)
@@ -25,6 +25,7 @@ region_quest_finished = (300, 900, 830, 35)
 region_action = (285, 985, 730, 30)
 region_spell = (285, 985, 500, 30)
 region_gardener_quest = (180, 300, 770, 40)
+region_letmehear = (200, 475, 195, 25)
 
 # Functions
 def key_hold(key, hold_time):
@@ -151,8 +152,13 @@ while True:
             pyautogui.click(next_click)
             time.sleep(1)
             # Option
-            pyautogui.click(let_me_hear)
-            time.sleep(0.5)
+            while True:
+                if pyautogui.locateCenterOnScreen('LET_ME_HEAR.png', region=region_letmehear, confidence=0.8):
+                    cords = pyautogui.locateCenterOnScreen('LET_ME_HEAR.png', region=region_letmehear, confidence=0.8)
+                    pyautogui.click((cords))
+                    break
+                else:
+                    time.sleep(0.5)
             # next_click 3
             pyautogui.click(next_click)
             time.sleep(0.5)
